@@ -1,6 +1,6 @@
-# DESIGN PATTERNS
+#DESIGN PATTERNS
 
-## Observer Pattern
+##Observer Pattern
 
 A weather station has subscribers. When data changes, notify all subscribers.
 
