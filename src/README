@@ -1,1 +1,50 @@
+# DESIGN PATTERNS
+
+## Observer Pattern
+
+A weather station has subscribers. When data changes, notify all subscribers.
+
+WeatherObserverable (interface) — register/remove/notify/setWeatherReadings.
+
+WeatherObserver (interface) — update(WeatherData).
+
+WeatherStation (class) — implements WeatherObserverable; holds List<WeatherObserver> and WeatherData; notifies observers.
+
+WeatherData (class) — data holder: temperature, humidity.
+
+CurrentConditionsDisplay (class) — implements WeatherObserver; reacts to updates.
+
+ForeCastDisplay (class) — implements WeatherObserver; reacts to updates.
+
+WeatherStationApp (class) — client bootstrap: creates WeatherStation and displays, registers observers, updates readings.
+
+## UML Diagram:
++----------------------+          implements           +------------------+
+| WeatherObserverable  |<-----------------------------|  WeatherStation  |
+| <<interface>>        |                              | - users: List<>  |
+| +addObserver(...)    |                              | - weatherData    |
+| +removeObserver(...) |                              | +addObserver()   |
+| +notifyObserver()    |                              | +removeObserver()|
+| +setWeatherReadings()|                              | +notifyObserver()|
++----------------------+                              +------------------+
+        ^  ^  ^
+        |  |  | implements
+        |  |  +--------------------------------+
+        |  |                                   |
+        |  |                 +------------------+      uses       +-------------+
+        |  |                 | WeatherObserver  |<-----------------| WeatherData |
+        |  |                 | <<interface>>    |                 | -temp       |
+        |  |                 | +update(data)    |                 | -humidity   |
+        |  |                 +------------------+                 +-------------+
+        |  |
+        |  +--> CurrentConditionsDisplay (implements WeatherObserver)
+        |
+        +--> ForeCastDisplay (implements WeatherObserver)
+
+WeatherStationApp (main)
+  - creates WeatherStation
+  - creates displays
+  - registers displays with WeatherStation
+  - calls setWeatherReadings(...)
+
 
