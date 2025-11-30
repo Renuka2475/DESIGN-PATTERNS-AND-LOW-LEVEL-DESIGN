@@ -3,19 +3,12 @@
 ##Observer Pattern
 
 A weather station has subscribers. When data changes, notify all subscribers.
-
 WeatherObserverable (interface) — register/remove/notify/setWeatherReadings.
-
 WeatherObserver (interface) — update(WeatherData).
-
 WeatherStation (class) — implements WeatherObserverable; holds List<WeatherObserver> and WeatherData; notifies observers.
-
 WeatherData (class) — data holder: temperature, humidity.
-
 CurrentConditionsDisplay (class) — implements WeatherObserver; reacts to updates.
-
 ForeCastDisplay (class) — implements WeatherObserver; reacts to updates.
-
 WeatherStationApp (class) — client bootstrap: creates WeatherStation and displays, registers observers, updates readings.
 
 ## UML Diagram:
@@ -48,3 +41,79 @@ WeatherStationApp (main)
   - calls setWeatherReadings(...)
 
 
+# Decorator Pattern
+
+## The Decorator Pattern attaches additional responsibilities to an object dynamically by wrapping it inside decorator objects.
+   Both the original object and the decorators implement the same interface, so the wrapped object behaves like the original but with extra features added at runtime.
+
+   Crystal-Clear Memory Definition
+
+   Decorator = Add features like layers around an object, each layer contributing something new, without modifying the base object or creating many subclasses.
+
+Decorator Pattern — Story You Will Never Forget
+
+Imagine you buy a plain pizza.
+That’s your base object.
+
+Now you tell the chef:
+
+➡️ “Add cheese.”
+He doesn’t remake the pizza —
+he just wraps it with a cheese topping layer.
+
+Then you say:
+
+➡️ “Add olives.”
+He wraps another layer on top of the pizza.
+
+Then:
+
+➡️ “Add mushrooms.”
+Another wrapper added.
+
+Now your final pizza is:
+
+Mushrooms → Olives → Cheese → Plain Pizza
+
+Each topping is a wrapper (decorator) around the pizza.
+
+And whenever you ask:
+
+“What’s the total cost?”
+
+“What toppings are there?”
+
+Your request passes through each wrapper (topping) one by one,
+each adding its own cost + description.
+
+⭐ One Line to Remember
+
+Decorator = Add new features by wrapping an object with layers, instead of changing or creating many classes.
+
+           +--------------------+
+           |    Pizza (Interface)
+           |  getDescription()
+           |  getCost()
+           +--------------------+
+                     ▲
+                     |
+           +--------------------+
+           |  Margherita (Concrete Pizza)
+           +--------------------+
+                     |
+                     |
+   -------------------------------------------------
+   |                                               |
+   v                                               v
++-------------------+               +-------------------+
+| PizzaDecorator    | (Abstract)    |   Cheese          |
+| - pizza: Pizza    |-------------->| +getDescription() |
+|                   |               | +getCost()        |
++-------------------+               +-------------------+
+                                             ▲
+                                             |
+                                   +-------------------+
+                                   |    Olives        |
+                                   | +getDescription() |
+                                   | +getCost()        |
+                                   +-------------------+
