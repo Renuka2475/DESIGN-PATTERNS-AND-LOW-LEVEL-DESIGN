@@ -164,3 +164,23 @@ Client (ShapeMain) → asks factory:
                     |     getShape("Circle")
                     | shape.draw()         |
                     +----------------------+
+
+# Abstract Factory pattern
+
+Abstract Factory provides an interface to create families of related objects without specifying their concrete classes.
+
+➡️ Family of objects = objects that belong together.
+➡️ Client uses only the abstract factory, not the actual classes.
+
+                    MealFactory (Abstract)
+                 /                         \
+      VegMealFactory                   NonVegMealFactory
+        |                                           |
+   VegBiryani  +  GulabJamun          ChickenBiryani + IceCream
+       \             /                         \           /
+        ------------ Client uses only MealFactory ---------
+
+Abstract Factory Pattern creates families of related objects without exposing their concrete classes.
+The client selects a factory (e.g., VegFactory / NonVegFactory), and that factory produces all related products belonging to the same family.
+It provides consistency across product groups and avoids tight coupling with concrete classes.
+Switching entire product families is done simply by swapping the factory — no client code changes needed.
