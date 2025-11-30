@@ -117,3 +117,50 @@ Decorator = Add new features by wrapping an object with layers, instead of chang
                                    | +getDescription() |
                                    | +getCost()        |
                                    +-------------------+
+
+# Factory Pattern
+Factory Pattern is used to create objects without exposing the creation logic to the client.
+The client asks the factory for an object, and the factory decides which class to create.
+
+Shape (Interface) → common contract (draw()).
+
+Circle & Rectangle (Concrete Classes) → actual implementations.
+
+ShapeFactory (Factory Class) → decides which Shape object to create based on input.
+
+Client (ShapeMain) → asks factory:
+"Give me a Circle" → factory returns Circle object.
+
+                     +----------------------+
+                     |       Shape          |
+                     |  (interface)         |
+                     |  draw()              |
+                     +----------+-----------+
+                                |
+        -------------------------------------------------
+        |                                               |
+        v                                               v
++-------------------+                         +----------------------+
+|      Circle       |                         |      Rectangle       |
+|  implements Shape |                         |   implements Shape   |
+|  draw()           |                         |      draw()          |
++-------------------+                         +----------------------+
+
+                     +----------------------+
+                     |     ShapeFactory     |
+                     |----------------------|
+                     |  getShape(String)    |
+                     |   if "Circle"        |
+                     |      return Circle   |
+                     |   if "Rectangle"     |
+                     |      return Rectangle|
+                     +----------+-----------+
+                                |
+                                v
+                    +----------------------+
+                    |      Client          |
+                    |   (ShapeMain)        |
+                    | shape = factory.     |
+                    |     getShape("Circle")
+                    | shape.draw()         |
+                    +----------------------+
